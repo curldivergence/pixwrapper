@@ -1,0 +1,12 @@
+[package]
+name = "pixwrapper"
+version = "0.1.0"
+authors = ["Andrey Pushkar <mail@apushkar.me>"]
+edition = "2018"
+description = "A tiny library that exposes bindings to PIX on Windows graphics debugger/profiler client API"
+keywords = ["pix", "winpix", "d3d", "d3d12", "directx12", "directx"]
+
+[build-dependencies]
+bindgen = "0.54.0"
+
+[dependencies]
