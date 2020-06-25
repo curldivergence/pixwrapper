@@ -2,6 +2,9 @@
 mod tests {
     #[test]
     fn it_works() {
-        assert_eq!(2 + 2, 4);
+        // use crate::test_func;
+        // unsafe {
+        //     test_func();
+        // }
     }
 }
