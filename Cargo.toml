@@ -1,6 +1,6 @@
 [package]
 name = "pixwrapper"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Andrey Pushkar <mail@apushkar.me>"]
 edition = "2018"
 description = "A tiny library that exposes bindings to PIX on Windows graphics debugger/profiler client API"
