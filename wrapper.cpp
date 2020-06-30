@@ -3,45 +3,52 @@
 #include "DXProgrammableCapture.h"
 #include "WinPixEventRuntime\\pix3.h"
 
+static IDXGraphicsAnalysis *gs_AnalysisInterface = nullptr;
+static HRESULT gs_InitResult = E_FAIL;
 
-static IDXGraphicsAnalysis *g_AnalysisInterface = nullptr;
-
-HRESULT pix_init_analysis()
+void pix_init_analysis()
 {
-    return DXGIGetDebugInterface1(0, IID_PPV_ARGS(&g_AnalysisInterface));
+    gs_InitResult = DXGIGetDebugInterface1(0, IID_PPV_ARGS(&gs_AnalysisInterface));
 }
 
 void pix_shutdown_analysis()
 {
-    g_AnalysisInterface->Release();
+    if (gs_AnalysisInterface && gs_InitResult == S_OK)
+        gs_AnalysisInterface->Release();
 }
 
 void pix_begin_capture()
 {
-    g_AnalysisInterface->BeginCapture();
+    if (gs_AnalysisInterface && gs_InitResult == S_OK)
+        gs_AnalysisInterface->BeginCapture();
 }
 
 void pix_end_capture()
 {
-    g_AnalysisInterface->EndCapture();
+    if (gs_AnalysisInterface && gs_InitResult == S_OK)
+        gs_AnalysisInterface->EndCapture();
 }
 
 void pix_begin_event_cmd_list(ID3D12CommandList *command_list, UINT64 color, const char *marker)
 {
-    PIXBeginEvent(command_list, color, "%s", marker);
+    if (gs_AnalysisInterface && gs_InitResult == S_OK)
+        PIXBeginEvent(command_list, color, "%s", marker);
 }
 
 void pix_end_event_cmd_list(ID3D12CommandList *command_list)
 {
-    PIXEndEvent(command_list);
+    if (gs_AnalysisInterface && gs_InitResult == S_OK)
+        PIXEndEvent(command_list);
 }
 
 void pix_begin_event_cmd_queue(ID3D12CommandQueue *command_queue, UINT64 color, const char *marker)
 {
-    PIXBeginEvent(command_queue, color, "%s", marker);
+    if (gs_AnalysisInterface && gs_InitResult == S_OK)
+        PIXBeginEvent(command_queue, color, "%s", marker);
 }
 
 void pix_end_event_cmd_queue(ID3D12CommandQueue *command_queue)
 {
-    PIXEndEvent(command_queue);
+    if (gs_AnalysisInterface && gs_InitResult == S_OK)
+        PIXEndEvent(command_queue);
 }

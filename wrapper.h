@@ -6,7 +6,7 @@
 extern "C"
 {
 #endif
-    HRESULT pix_init_analysis();
+    void pix_init_analysis();
     void pix_shutdown_analysis();
     void pix_begin_capture();
     void pix_end_capture();
