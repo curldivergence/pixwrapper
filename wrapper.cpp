@@ -1,5 +1,6 @@
 #include "wrapper.h"
 
+#define USE_PIX
 #include "DXProgrammableCapture.h"
 #include "WinPixEventRuntime\\pix3.h"
 
@@ -29,13 +30,13 @@ void pix_end_capture()
         gs_AnalysisInterface->EndCapture();
 }
 
-void pix_begin_event_cmd_list(ID3D12CommandList *command_list, UINT64 color, const char *marker)
+void pix_begin_event_cmd_list(ID3D12GraphicsCommandList *command_list, UINT64 color, const char *marker)
 {
     if (gs_AnalysisInterface && gs_InitResult == S_OK)
         PIXBeginEvent(command_list, color, "%s", marker);
 }
 
-void pix_end_event_cmd_list(ID3D12CommandList *command_list)
+void pix_end_event_cmd_list(ID3D12GraphicsCommandList *command_list)
 {
     if (gs_AnalysisInterface && gs_InitResult == S_OK)
         PIXEndEvent(command_list);
