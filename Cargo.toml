@@ -8,7 +8,7 @@ license = "GPL-3.0"
 keywords = ["pix", "winpix", "d3d", "d3d12", "directx12"]
 
 [build-dependencies]
-bindgen = "0.54.0"
+bindgen = "0.57"
 cc = "1.0.54"
 
 [dependencies]
